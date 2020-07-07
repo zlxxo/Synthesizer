@@ -179,10 +179,12 @@ begin
 	-- register logic for synchronization
 	process(clk)
 	begin
-		ps2_clk_syn1_reg <= ps2_clk_syn1_next;
-		ps2_clk_in_reg <= ps2_clk_in_next;
-		ps2_dat_syn1_reg <= ps2_dat_syn1_next;
-		ps2_dat_in_reg <= ps2_dat_in_next;
+		if(clk'event and clk = '1') then
+			ps2_clk_syn1_reg <= ps2_clk_syn1_next;
+			ps2_clk_in_reg <= ps2_clk_in_next;
+			ps2_dat_syn1_reg <= ps2_dat_syn1_next;
+			ps2_dat_in_reg <= ps2_dat_in_next;
+		end if;
 	end process;
 	
 	-- next-state logic for synchronization

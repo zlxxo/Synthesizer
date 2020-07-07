@@ -50,7 +50,7 @@ begin
 	
 	
 	process(oDone_reg, LCD_EN_reg, preStart_reg, mStart_reg, cont_reg, state_reg, cont_reg)
-		variable od, le, ms: std_logic;
+		variable od, le, ms, ps: std_logic;
 		variable st: unsigned(1 downto 0);
 		variable c: unsigned(4 downto 0);
 	begin
@@ -59,13 +59,16 @@ begin
 		ms := mStart_reg;
 		st := state_reg;
 		c := cont_reg;
+		ps := preStart_reg;
+		
+		ps := iSTart;
 		
 		if(preStart_reg = '0' and iStart = '1') then
 			ms := '1';
 			od := '0';
 		end if;
 		
-		if(mStart_reg = '1') then
+		if(ms = '1') then
 			case state_reg is
 				when to_unsigned(0, 2) =>
 					st := state_reg + 1;
@@ -92,6 +95,7 @@ begin
 		mStart_next <= ms;
 		state_next <= st;
 		cont_next <= c;
+		preStart_next <= ps;
 	end process;
 	
 	oDone <= oDOne_reg;

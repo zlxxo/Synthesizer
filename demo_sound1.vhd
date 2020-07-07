@@ -49,7 +49,7 @@ begin
 		tr := tr_reg;
 		
 		if(step_reg < step_r) then
-			case st is
+			case st_reg is
 				when to_unsigned(0, 6) =>
 					st := st_reg + 1;
 				when to_unsigned(1, 6) =>
